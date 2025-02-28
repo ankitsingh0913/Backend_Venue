@@ -4,7 +4,6 @@ import com.XCLONE.Backend_Venue.DTOs.ProductDTO;
 import com.XCLONE.Backend_Venue.Entity.Products;
 import com.XCLONE.Backend_Venue.Entity.Users;
 import com.XCLONE.Backend_Venue.Repository.ProductRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -81,12 +80,12 @@ public class ProductServices {
         return productRepository.findAll();
     }
 
-    public Optional<Products> findById(ObjectId id){
+    public Optional<Products> findById(Long id){
         return productRepository.findById(id);
     }
 
     @Transactional
-    public boolean deleteById(ObjectId id, String userName){
+    public boolean deleteById(Long id, String userName){
         boolean removed = false;
         try {
             Users user = userServices.findByUserName(userName);

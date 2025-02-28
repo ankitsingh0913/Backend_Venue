@@ -1,17 +1,14 @@
 package com.XCLONE.Backend_Venue.Entity;
 
+import com.XCLONE.Backend_Venue.Entity.Products;
+import jakarta.persistence.*;
 import lombok.*;
-import org.bson.types.ObjectId;
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Document(collection = "users")
+@Entity
+@Table(name = "users")
 @Data
 @Builder
 @AllArgsConstructor
@@ -19,19 +16,38 @@ import java.util.List;
 public class Users {
 
     @Id
-    private ObjectId id;
-    @Indexed(unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment primary key
+    private Long id;
+
+    @Column(name = "first_name", nullable = false, unique = true)
     @NonNull
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "user_name", nullable = false)
     @NonNull
     private String userName;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "phone_no")
     private String phoneNo;
+
+    @Column(name = "image")
     private String image;
+
+    @Column(name = "password", nullable = false)
     @NonNull
     private String password;
-    private List<String> roles;
-    @DBRef
+
+    @ElementCollection
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    private List<String> roles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Products> productsEntries = new ArrayList<>();
 }

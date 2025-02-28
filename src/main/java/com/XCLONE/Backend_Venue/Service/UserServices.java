@@ -1,7 +1,6 @@
 package com.XCLONE.Backend_Venue.Service;
 import com.XCLONE.Backend_Venue.Entity.Users;
 import com.XCLONE.Backend_Venue.Repository.UserRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -62,11 +61,11 @@ public class UserServices {
         return userRepository.findAll();
     }
 
-    public Optional<Users> findById(ObjectId id){
+    public Optional<Users> findById(Long id){
         return userRepository.findById(id);
     }
 
-    public void deleteById(ObjectId id){
+    public void deleteById(Long id){
         userRepository.deleteById(id);
     }
 

@@ -1,13 +1,15 @@
 spring:
   application:
     name: Backend_Venue
-  data:
-    mongodb:
-      uri: ${Mongo_URL}
-      database: Venues
-      auto-index-creation: true
-    main:
-      allow-circular-references: true
+  database:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL}
+    username: root
+    password: Ankitsingh@9999
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
   mvc:
     favicon:
       enabled: false
