@@ -1,9 +1,8 @@
-package com.XCLONE.Venues.Client.Repository;
+package com.XCLONE.Backend_Venue.Repository;
 
-import com.XCLONE.Venues.Client.Entity.Products;
+import com.XCLONE.Backend_Venue.Entity.Products;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
 
 public interface ProductRepository extends MongoRepository<Products, ObjectId> {
 

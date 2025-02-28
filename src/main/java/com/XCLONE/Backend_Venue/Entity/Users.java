@@ -32,6 +32,6 @@ public class Users {
     @NonNull
     private String password;
     private List<String> roles;
-//    @DBRef
-//    private List<Products> productsEntries = new ArrayList<>();
+    @DBRef
+    private List<Products> productsEntries = new ArrayList<>();
 }

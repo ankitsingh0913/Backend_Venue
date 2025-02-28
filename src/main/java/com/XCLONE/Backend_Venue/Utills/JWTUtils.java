@@ -34,8 +34,12 @@ public class JWTUtils {
                 .parseSignedClaims(token)
                 .getPayload();
     }
+    //edited
 
     private Boolean isTokenExpired(String token) {
+        if (extractExpiration(token) == null) {
+            return true; // Treat tokens with missing expiration as expired
+        }
         return extractExpiration(token).before(new Date());
     }
 
@@ -45,12 +49,14 @@ public class JWTUtils {
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
+        long expirationTime = 1000 * 60 * 60 * 10;
         return Jwts.builder()
                 .claims(claims)
                 .subject(subject)
                 .header().empty().add("typ","JWT")
                 .and()
                 .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(getSigningKey())
                 .compact();
     }

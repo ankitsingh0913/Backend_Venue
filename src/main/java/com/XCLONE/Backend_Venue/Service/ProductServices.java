@@ -1,9 +1,9 @@
-package com.XCLONE.Venues.Client.Services;
+package com.XCLONE.Backend_Venue.Service;
 
-import com.XCLONE.Venues.Client.Entity.Users;
-import com.XCLONE.Venues.Client.DTOs.ProductDTO;
-import com.XCLONE.Venues.Client.Entity.Products;
-import com.XCLONE.Venues.Client.Repository.ProductRepository;
+import com.XCLONE.Backend_Venue.DTOs.ProductDTO;
+import com.XCLONE.Backend_Venue.Entity.Products;
+import com.XCLONE.Backend_Venue.Entity.Users;
+import com.XCLONE.Backend_Venue.Repository.ProductRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
