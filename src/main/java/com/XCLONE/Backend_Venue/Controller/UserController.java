@@ -31,6 +31,23 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAllUsers() {
+        // Get authenticated user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+
+        // Find the user in DB
+        Users user = userServices.findByUserName(userName);
+
+        // Check if user has ADMIN role
+        if (user.getRoles().contains("ADMIN")) {
+            return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Access Denied: Only ADMINs can access this.", HttpStatus.FORBIDDEN);
+        }
+    }
+
     @PutMapping()
     public ResponseEntity<?> updateUser(@RequestBody Users user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

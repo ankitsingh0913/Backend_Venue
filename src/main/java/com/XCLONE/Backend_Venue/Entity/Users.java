@@ -1,6 +1,5 @@
 package com.XCLONE.Backend_Venue.Entity;
 
-import com.XCLONE.Backend_Venue.Entity.Products;
 import jakarta.persistence.*;
 import lombok.*;
 
