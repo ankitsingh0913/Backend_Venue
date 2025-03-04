@@ -1,15 +1,20 @@
 spring:
   application:
     name: Backend_Venue
-  database:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: ${DB_URL}
+  datasource:
+    driver-Class-Name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/venues
     username: root
-    password: ${DB_PASSWORD}git
+    password: ${DB_PASSWORD}
   jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: update  # Options: none, validate, update, create, create-drop
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect_storage_engine: innodb
   mvc:
     favicon:
       enabled: false

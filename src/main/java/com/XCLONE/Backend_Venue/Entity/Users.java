@@ -19,14 +19,14 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment primary key
     private Long id;
 
-    @Column(name = "first_name", nullable = false, unique = true)
+    @Column(name = "first_name", nullable = false)
     @NonNull
     private String firstName;
 
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "user_name", nullable = false)
+    @Column(name = "user_name", nullable = false, unique = true)
     @NonNull
     private String userName;
 
@@ -43,11 +43,11 @@ public class Users {
     @NonNull
     private String password;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     private List<String> roles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Products> productsEntries = new ArrayList<>();
 }

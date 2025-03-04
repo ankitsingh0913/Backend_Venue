@@ -59,6 +59,25 @@ public class PublicController {
         }
     }
 
+    @PostMapping("/signup-Admin")
+    public ResponseEntity<?> signupAdmin(@RequestBody UserDTO user){
+        try {
+            Users newUser = new Users();
+            newUser.setEmail(user.getEmail());
+            newUser.setFirstName(user.getFirstName());
+            newUser.setLastName(user.getLastName());
+            newUser.setUserName(user.getUserName());
+            newUser.setPassword(user.getPassword());
+            newUser.setPhoneNo(user.getPhoneNo());
+            userServices.saveNewAdmin(newUser);
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            return new ResponseEntity<>(response,HttpStatus.CREATED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
     @PostMapping("/signup-seller")
     public ResponseEntity<?> signupSeller(@RequestBody UserDTO user){
         try {
